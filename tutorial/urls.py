@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from quickStart import views
-
+from quickStart.views import BookListCreateView
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
+    path('books/', BookListCreateView.as_view(), name='book-list-create'),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
